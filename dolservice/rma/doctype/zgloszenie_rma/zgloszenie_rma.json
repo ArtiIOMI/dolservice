@@ -1,0 +1,264 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-06 11:42:26.940628",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "zakonczone",
+  "column_break_zrpe",
+  "naprawa_odp\u0142atna",
+  "section_break_vynt",
+  "otrzymano_na_magazynie",
+  "otrzymano_na_serwisie",
+  "column_break_maci",
+  "wydane_z_magazynu",
+  "wydane_z_serwisu",
+  "section_break_dmbc",
+  "nr_fakturyparagonu",
+  "column_break_gkcg",
+  "data_zakupu",
+  "section_break_euay",
+  "podmiot",
+  "email",
+  "telefon_kontaktowy",
+  "nazwa_firmy",
+  "nip",
+  "column_break_xzvz",
+  "full_name",
+  "adres",
+  "section_break_abkc",
+  "serwisowane_urz\u0105dzenia",
+  "wyposa\u017cenie_tab",
+  "opakowanie",
+  "zasilacz",
+  "mysz",
+  "klawiatura",
+  "kabel_zasilajacy",
+  "column_break_erjf",
+  "fakturaparagon",
+  "karta_rma",
+  "opis_usterek",
+  "tab_3_tab",
+  "regulamin",
+  "text_imvs"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "zakonczone",
+   "fieldtype": "Check",
+   "label": "Zako\u0144czone?"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_vynt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "otrzymano_na_magazynie",
+   "fieldtype": "Datetime",
+   "label": "Otrzymano na Magazynie"
+  },
+  {
+   "fieldname": "otrzymano_na_serwisie",
+   "fieldtype": "Datetime",
+   "label": "Otrzymano na Serwisie"
+  },
+  {
+   "fieldname": "column_break_maci",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "wydane_z_magazynu",
+   "fieldtype": "Datetime",
+   "label": "Wydane z Magazynu"
+  },
+  {
+   "fieldname": "wydane_z_serwisu",
+   "fieldtype": "Datetime",
+   "label": "Wydane z Serwisu"
+  },
+  {
+   "fieldname": "section_break_euay",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Firma",
+   "fieldname": "podmiot",
+   "fieldtype": "Select",
+   "label": "Podmiot",
+   "options": "Firma\nOsoba"
+  },
+  {
+   "fieldname": "nazwa_firmy",
+   "fieldtype": "Data",
+   "label": "Nazwa Firmy"
+  },
+  {
+   "fieldname": "nip",
+   "fieldtype": "Data",
+   "label": "NIP"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "default": "+48",
+   "fieldname": "telefon_kontaktowy",
+   "fieldtype": "Data",
+   "label": "Telefon Kontaktowy"
+  },
+  {
+   "fieldname": "column_break_xzvz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Imie i Nazwisko"
+  },
+  {
+   "fieldname": "adres",
+   "fieldtype": "Long Text",
+   "label": "Adres"
+  },
+  {
+   "fieldname": "wyposa\u017cenie_tab",
+   "fieldtype": "Tab Break",
+   "label": "Wyposa\u017cenie"
+  },
+  {
+   "default": "0",
+   "fieldname": "opakowanie",
+   "fieldtype": "Check",
+   "label": "Opakowanie"
+  },
+  {
+   "default": "0",
+   "fieldname": "zasilacz",
+   "fieldtype": "Check",
+   "label": "Zasilacz"
+  },
+  {
+   "default": "0",
+   "fieldname": "mysz",
+   "fieldtype": "Check",
+   "label": "Mysz"
+  },
+  {
+   "default": "0",
+   "fieldname": "klawiatura",
+   "fieldtype": "Check",
+   "label": "Klawiatura"
+  },
+  {
+   "default": "0",
+   "fieldname": "kabel_zasilajacy",
+   "fieldtype": "Check",
+   "label": "Kabel zasilajacy"
+  },
+  {
+   "fieldname": "column_break_erjf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "fakturaparagon",
+   "fieldtype": "Check",
+   "label": "Faktura/Paragon"
+  },
+  {
+   "default": "0",
+   "fieldname": "karta_rma",
+   "fieldtype": "Check",
+   "label": "Karta RMA"
+  },
+  {
+   "default": "0",
+   "fieldname": "opis_usterek",
+   "fieldtype": "Check",
+   "label": "Opis usterek"
+  },
+  {
+   "fieldname": "section_break_abkc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "serwisowane_urz\u0105dzenia",
+   "fieldtype": "Table",
+   "label": "Serwisowane Urz\u0105dzenia",
+   "options": "Tabela Zgloszenia RMA"
+  },
+  {
+   "fieldname": "column_break_zrpe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "naprawa_odp\u0142atna",
+   "fieldtype": "Check",
+   "label": "Naprawa Odp\u0142atna?"
+  },
+  {
+   "fieldname": "section_break_dmbc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "nr_fakturyparagonu",
+   "fieldtype": "Data",
+   "label": "Nr Faktury/Paragonu"
+  },
+  {
+   "fieldname": "column_break_gkcg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "data_zakupu",
+   "fieldtype": "Date",
+   "label": "Data Zakupu"
+  },
+  {
+   "fieldname": "tab_3_tab",
+   "fieldtype": "Tab Break",
+   "label": "Regulamin"
+  },
+  {
+   "fieldname": "regulamin",
+   "fieldtype": "Heading",
+   "label": "Regulamin"
+  },
+  {
+   "default": "1.Serwis Computer Centernie ponosi \u017cadnej odpowiedzialno\u015bci za dane pozostawione przez Klienta na przyjmowanym sprz\u0119cie - w przypadku\nich usuni\u0119cia Klient nie b\u0119dzie wyst\u0119powa\u0107 o odzyskanie danych i zado\u015b\u0107 uczynienie.\n2.Klient potwierdza, \u017ce wszystkie dane pozostawione na serwisowanym sprz\u0119cie s\u0105 jego w\u0142asno\u015bci\u0105, posiada na oprogramowanie licencje oraz\nbierze za nie wszelk\u0105 odpowiedzialno\u015b\u0107.\n3.W przypadku sprz\u0119tu obj\u0119tego gwarancj\u0105 producenta serwis Computer Centerjest jedynie po\u015brednikiem inie odpowiada za czas przebywania\nproduktu na serwisie zewn\u0119trznym producenta! W pozosta\u0142ych przypadkach czas naprawy gwarancyjnej jest zgodny z kart\u0105 gwarancyjn\u0105.\n4. przypadku naprawy notebook\u00f3w, klient zostaje obci\u0105\u017cony kwot\u0105 50z\u0142 brutto. Op\u0142ata ta zwi\u0105zana jestz wycen\u0105 usterki oraz kosztami\nwysy\u0142ki do wyspecjaliz owanego serwisu notebook\u00f3w.\n5.Niniejsze potwierdzenie serwisowe domy\u015blnie stanowi o przyj\u0119ciu sprz\u0119tu w trybie gwarancyjnym.\n6.Odbi\u00f3r tow aru z Serwisu Computer-Center:\nRewers wydawany przy przyjmowaniu sprz\u0119tu do serwisu Computer Center jest JEDYNYM dokumentem uprawniaj\u0105cym do odbioru sprz\u0119tu z\nserwisu, bez sprawdzania danych odbieraj\u0105cego . Sprz\u0119t nale\u017cy odebra\u0107 w terminie do 3 miesi\u0119cyod daty powiadomienia o zako\u0144czeniu\nprocedur serwisowych. Przekroczenie tego terminu przez klienta spowoduje i\u017c sprz\u0119t zostanie poddany utylizacji!\nf.Odrzucenie reklamacji przez $erwis Computer- Center:\nPodstaw\u0119 odrzucenia roszcze\u0144 gwarancyjnych stanowi ka\u017cde uszkodzenie mechaniczne, cho\u0107by stwierdzone zosta\u0142o dopiero w serwisie\ntechnicznym docelowym, a nie zosta\u0142o ujawnione w czasie przyjmowania reklamacji przez serwisanta firmy Computer Center. ",
+   "fieldname": "text_imvs",
+   "fieldtype": "Text",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-07 15:12:00.240777",
+ "modified_by": "Administrator",
+ "module": "RMA",
+ "name": "Zgloszenie RMA",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

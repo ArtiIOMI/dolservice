@@ -1,6 +1,6 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "format:RMA {##}/{MM}/{YY}",
  "creation": "2024-08-06 11:42:26.940628",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -208,10 +208,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-13 13:33:00.927785",
+ "modified": "2024-08-14 13:16:12.297547",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

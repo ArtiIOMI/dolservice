@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-12 13:13:09.236257",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nazwa_cz\u0119\u015bci",
+  "ilo\u015b\u0107",
+  "z_magazynu"
+ ],
+ "fields": [
+  {
+   "fieldname": "nazwa_cz\u0119\u015bci",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Nazwa cz\u0119\u015bci",
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Komponenty\"]]",
+   "options": "Item"
+  },
+  {
+   "fieldname": "ilo\u015b\u0107",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Ilo\u015b\u0107"
+  },
+  {
+   "fieldname": "z_magazynu",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Z magazynu",
+   "options": "Warehouse"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-06-12 13:24:45.931672",
+ "modified_by": "Administrator",
+ "module": "Serwis",
+ "name": "Tabela uzytych komponentow",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

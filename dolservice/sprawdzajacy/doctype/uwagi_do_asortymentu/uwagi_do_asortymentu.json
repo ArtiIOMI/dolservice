@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-05-27 10:50:18.062927",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "element_obudowy",
+  "column_break_jtqt",
+  "opis"
+ ],
+ "fields": [
+  {
+   "fieldname": "element_obudowy",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Nazwa Element",
+   "options": "\nPalmrest\nBody\nKlapa\nMatryca\nZawiasy\nKlawiatura\nTouchPad\nSp\u00f3d\nInne",
+   "sort_options": 1
+  },
+  {
+   "fieldname": "column_break_jtqt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opis",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Opis"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-07-01 13:57:48.114014",
+ "modified_by": "Administrator",
+ "module": "Sprawdzajacy",
+ "name": "Uwagi do asortymentu",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

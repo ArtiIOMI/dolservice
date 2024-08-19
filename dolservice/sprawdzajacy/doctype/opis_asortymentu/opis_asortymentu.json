@@ -1,0 +1,181 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:Opis-{nr_seryjny}",
+ "creation": "2024-05-27 10:48:48.997749",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "barcode",
+  "nr_seryjny",
+  "column_break_flgh",
+  "item_name",
+  "dostawa",
+  "section_break_ntii",
+  "uszkodzenia",
+  "column_break_ywpg",
+  "uwagi",
+  "section_break_fcmy",
+  "grade_column",
+  "grade_matrycy",
+  "grade_obudowy",
+  "uklad_klawiatury",
+  "column_break_jtey",
+  "dotykowa_matryca",
+  "podswietlana_klawiatura",
+  "trackpoint",
+  "kamera",
+  "section_break_ccpz",
+  "konfiguracja"
+ ],
+ "fields": [
+  {
+   "depends_on": "eval: doc.creation == null",
+   "fieldname": "barcode",
+   "fieldtype": "Data",
+   "label": "Skaner",
+   "length": 300,
+   "options": "Barcode"
+  },
+  {
+   "fieldname": "nr_seryjny",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Nr Seryjny",
+   "unique": 1
+  },
+  {
+   "fieldname": "uszkodzenia",
+   "fieldtype": "Table",
+   "label": "Uszkodzenia",
+   "options": "Uszkodzenia asortymentu"
+  },
+  {
+   "fieldname": "column_break_flgh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_fcmy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "grade_obudowy",
+   "fieldtype": "Select",
+   "label": "Grade Obudowy",
+   "options": "Brak\nA\nA-\nA=\nB\nB-\nC"
+  },
+  {
+   "default": "0",
+   "fieldname": "dotykowa_matryca",
+   "fieldtype": "Check",
+   "label": "Dotykowa Matryca"
+  },
+  {
+   "fieldname": "column_break_jtey",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "trackpoint",
+   "fieldtype": "Check",
+   "label": "TrackPoint"
+  },
+  {
+   "fieldname": "section_break_ccpz",
+   "fieldtype": "Section Break",
+   "label": "Konfiguracja"
+  },
+  {
+   "fieldname": "konfiguracja",
+   "fieldtype": "Table",
+   "label": "Konfiguracja",
+   "options": "Konfiguracja asortymentu"
+  },
+  {
+   "fieldname": "uwagi",
+   "fieldtype": "Table",
+   "label": "Uwagi",
+   "options": "Uwagi do asortymentu"
+  },
+  {
+   "fieldname": "uklad_klawiatury",
+   "fieldtype": "Select",
+   "label": "Uk\u0142ad Klawiatury",
+   "options": "Brak\nPL\nInne"
+  },
+  {
+   "fieldname": "grade_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grade_matrycy",
+   "fieldtype": "Select",
+   "label": "Grade Matrycy",
+   "options": "Brak\nA\nA-\nA=\nB\nB-\nC"
+  },
+  {
+   "default": "0",
+   "fieldname": "podswietlana_klawiatura",
+   "fieldtype": "Check",
+   "label": "Pod\u015bwietlana Klawiatura"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Model",
+   "options": "Item"
+  },
+  {
+   "fieldname": "dostawa",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Dostawa",
+   "options": "Purchase Receipt",
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_ntii",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ywpg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "kamera",
+   "fieldtype": "Check",
+   "label": "Kamera"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-19 23:44:55.966091",
+ "modified_by": "Administrator",
+ "module": "Sprawdzajacy",
+ "name": "Opis Asortymentu",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

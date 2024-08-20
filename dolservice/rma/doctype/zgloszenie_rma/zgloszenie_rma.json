@@ -6,8 +6,6 @@
  "engine": "InnoDB",
  "field_order": [
   "zakonczone",
-  "column_break_zrpe",
-  "naprawa_odp\u0142atna",
   "section_break_vynt",
   "otrzymano_na_magazynie",
   "otrzymano_na_serwisie",
@@ -178,16 +176,6 @@
    "options": "Tabela Zgloszenia RMA"
   },
   {
-   "fieldname": "column_break_zrpe",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "naprawa_odp\u0142atna",
-   "fieldtype": "Check",
-   "label": "Naprawa Odp\u0142atna"
-  },
-  {
    "fieldname": "section_break_dmbc",
    "fieldtype": "Section Break"
   },
@@ -208,7 +196,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-14 13:16:12.297547",
+ "modified": "2024-08-20 21:17:33.354796",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

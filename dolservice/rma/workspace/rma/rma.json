@@ -1,0 +1,48 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"ZiC8y4VQHB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">RMA</span>\",\"col\":12}},{\"id\":\"ovD9K-sIFc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Zgloszenie Rma\",\"col\":3}}]",
+ "creation": "2024-08-20 19:03:41.747069",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "workflow",
+ "idx": 0,
+ "indicator_color": "blue",
+ "is_hidden": 0,
+ "label": "RMA",
+ "links": [],
+ "modified": "2024-08-20 19:12:21.888165",
+ "modified_by": "Administrator",
+ "module": "RMA",
+ "name": "RMA",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Hurtownik"
+  },
+  {
+   "role": "Detalista"
+  },
+  {
+   "role": "Serwisant"
+  }
+ ],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Zgloszenie Rma",
+   "link_to": "Zgloszenie RMA",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "RMA"
+}

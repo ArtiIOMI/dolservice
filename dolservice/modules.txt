@@ -1,4 +1,4 @@
 DolService
 RMA
-serwis
-sprawdzajacy
+Serwis
+Sprawdzajacy

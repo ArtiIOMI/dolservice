@@ -6,6 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "glowa",
   "barcode",
   "nr_seryjny",
   "column_break_flgh",
@@ -150,11 +151,15 @@
    "fieldname": "kamera",
    "fieldtype": "Check",
    "label": "Kamera"
+  },
+  {
+   "fieldname": "glowa",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-19 23:44:55.966091",
+ "modified": "2024-08-21 21:00:11.581718",
  "modified_by": "Administrator",
  "module": "Sprawdzajacy",
  "name": "Opis Asortymentu",

@@ -74,9 +74,8 @@ frappe.ui.form.on("Opis Asortymentu", {
         //console.log(frm.doc.nr_seryjny);
         //frappe.db.get_doc('Serial No',frm.doc.nr_seryjny).then(res => { if() console.log(res.purchase_document_no) });
         frappe.db.exists(cur_frm.doc.doctype ,"Opis-"+cur_frm.doc.nr_seryjny).then(res => {
-            console.log(res);
             if(res){
-                cur_frm.set_df_property('nr_seryjny', 'description', '<b><span style="color: red;">Taki nr. seryjny już został wpisany!!!</span></b>')
+                cur_frm.set_df_property('nr_seryjny', 'description', '<b><span style="color: red;">Taki <a href=Opis-'+cur_frm.doc.nr_seryjny+'>nr. seryjny</a> już został wpisany!!!</span></b>')
             }
         });
 
@@ -265,9 +264,13 @@ function PrintElem()
 
     var trdk = rdk.split('/');
 
-    frappe.db.get_value('Item', cur_frm.doc.item_name, 'item_name').then(r => {
-        nazwa = r.message.item_name;
-    });
+    if(!cur_frm.doc.nazwa_modelu){
+        frappe.db.get_value('Item', cur_frm.doc.item_name, 'item_name').then(r => {
+            nazwa = r.message.item_name;
+        });
+    } else {
+        nazwa = cur_frm.doc.nazwa_modelu;
+    }
 
     frappe.db.get_value('User', cur_frm.doc.modified_by, 'username').then(r => {
         autor = r.message.username;

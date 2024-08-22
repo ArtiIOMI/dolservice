@@ -48,8 +48,7 @@
    "fieldname": "otrzymano_na_magazynie",
    "fieldtype": "Datetime",
    "in_list_view": 1,
-   "label": "Otrzymano na Magazynie",
-   "reqd": 1
+   "label": "Otrzymano na Magazynie"
   },
   {
    "fieldname": "otrzymano_na_serwisie",
@@ -80,29 +79,25 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Podmiot",
-   "options": "Firma\nOsoba",
-   "reqd": 1
+   "options": "Firma\nOsoba"
   },
   {
    "fieldname": "nazwa_firmy",
    "fieldtype": "Data",
-   "label": "Imie Nazwisko/Nazwa Firmy",
-   "reqd": 1
+   "label": "Imie Nazwisko/Nazwa Firmy"
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Email",
-   "reqd": 1
+   "label": "Email"
   },
   {
    "default": "+48",
    "fieldname": "telefon_kontaktowy",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Telefon Kontaktowy",
-   "reqd": 1
+   "label": "Telefon Kontaktowy"
   },
   {
    "fieldname": "column_break_xzvz",
@@ -183,7 +178,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-22 18:37:36.956613",
+ "modified": "2024-08-22 20:10:15.702121",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

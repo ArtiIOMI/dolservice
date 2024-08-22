@@ -63,7 +63,7 @@
   {
    "columns": 1,
    "fieldname": "data_zakupu",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
@@ -73,7 +73,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-22 18:36:03.310585",
+ "modified": "2024-08-22 19:02:16.557526",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Tabela Zgloszenia RMA",

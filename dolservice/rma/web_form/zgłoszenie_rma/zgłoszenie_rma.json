@@ -19,7 +19,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2024-08-22 20:24:52.384975",
+ "modified": "2024-08-22 21:24:29.101246",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "zg\u0142oszenie-rma",
@@ -90,7 +90,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "fieldname": "nazwa_firmy",
+   "fieldname": "nazwa_podmiotu",
    "fieldtype": "Data",
    "hidden": 0,
    "label": "Imie Nazwisko/Nazwa Firmy",
@@ -98,7 +98,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -130,6 +130,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "description": "*P\u0142atne - Oznacza urz\u0105dzenie bez gwarancji. Koszt naprawy jest po stronie klienta.",
    "fieldname": "serwisowane_urz\u0105dzenia",
    "fieldtype": "Table",
    "hidden": 0,
@@ -158,7 +159,9 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "default": "0",
    "description": "",
+   "fieldname": "regulamin",
    "fieldtype": "Check",
    "hidden": 0,
    "label": "Zapozna\u0142em(am) si\u0119 z <a href=\"#\">Regulaminem</a>.",
@@ -171,6 +174,8 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "default": "0",
+   "fieldname": "dane_osobowe",
    "fieldtype": "Check",
    "hidden": 0,
    "label": "Wyra\u017cam zgod\u0119 na przetwarzanie danych osobowych, celem realizacji zlecenia.",

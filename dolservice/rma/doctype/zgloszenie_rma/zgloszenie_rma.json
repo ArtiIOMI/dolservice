@@ -17,10 +17,13 @@
   "email",
   "telefon_kontaktowy",
   "column_break_xzvz",
-  "nazwa_firmy",
+  "nazwa_podmiotu",
   "adres",
   "section_break_abkc",
   "serwisowane_urz\u0105dzenia",
+  "section_break_osqo",
+  "regulamin",
+  "dane_osobowe",
   "wyposa\u017cenie_tab",
   "opakowanie",
   "zasilacz",
@@ -80,11 +83,6 @@
    "in_list_view": 1,
    "label": "Podmiot",
    "options": "Firma\nOsoba"
-  },
-  {
-   "fieldname": "nazwa_firmy",
-   "fieldtype": "Data",
-   "label": "Imie Nazwisko/Nazwa Firmy"
   },
   {
    "fieldname": "email",
@@ -174,11 +172,34 @@
    "fieldtype": "Table",
    "label": "Serwisowane Urz\u0105dzenia",
    "options": "Tabela Zgloszenia RMA"
+  },
+  {
+   "fieldname": "section_break_osqo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "regulamin",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "regulamin"
+  },
+  {
+   "default": "0",
+   "fieldname": "dane_osobowe",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "dane osobowe"
+  },
+  {
+   "fieldname": "nazwa_podmiotu",
+   "fieldtype": "Data",
+   "label": "Imie Nazwisko/Nazwa Firmy"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-22 20:10:15.702121",
+ "modified": "2024-08-22 21:23:09.815798",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

@@ -6,29 +6,35 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "paid",
   "marka_model",
   "nr_seryjny",
   "opis_usterki",
-  "paid"
+  "nr_fakturyparagonu",
+  "data_zakupu"
  ],
  "fields": [
   {
+   "columns": 2,
    "fieldname": "marka_model",
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Marka, Model",
    "reqd": 1
   },
   {
+   "columns": 1,
    "fieldname": "nr_seryjny",
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_preview": 1,
-   "label": "Nr Seryjny",
-   "reqd": 1
+   "in_standard_filter": 1,
+   "label": "Nr Seryjny"
   },
   {
+   "columns": 3,
    "fieldname": "opis_usterki",
    "fieldtype": "Long Text",
    "in_list_view": 1,
@@ -41,14 +47,33 @@
    "fieldname": "paid",
    "fieldtype": "Check",
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "P\u0142atne"
+  },
+  {
+   "columns": 1,
+   "fieldname": "nr_fakturyparagonu",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Nr Faktury/Paragonu"
+  },
+  {
+   "columns": 1,
+   "fieldname": "data_zakupu",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Data Zakupu"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-21 21:23:57.726926",
+ "modified": "2024-08-22 18:36:03.310585",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Tabela Zgloszenia RMA",

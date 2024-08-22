@@ -12,10 +12,6 @@
   "column_break_maci",
   "wydane_z_magazynu",
   "wydane_z_serwisu",
-  "section_break_dmbc",
-  "nr_fakturyparagonu",
-  "column_break_gkcg",
-  "data_zakupu",
   "section_break_euay",
   "podmiot",
   "email",
@@ -51,7 +47,9 @@
   {
    "fieldname": "otrzymano_na_magazynie",
    "fieldtype": "Datetime",
-   "label": "Otrzymano na Magazynie"
+   "in_list_view": 1,
+   "label": "Otrzymano na Magazynie",
+   "reqd": 1
   },
   {
    "fieldname": "otrzymano_na_serwisie",
@@ -80,24 +78,31 @@
    "default": "Firma",
    "fieldname": "podmiot",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Podmiot",
-   "options": "Firma\nOsoba"
+   "options": "Firma\nOsoba",
+   "reqd": 1
   },
   {
    "fieldname": "nazwa_firmy",
    "fieldtype": "Data",
-   "label": "Imie Nazwisko/Nazwa Firmy"
+   "label": "Imie Nazwisko/Nazwa Firmy",
+   "reqd": 1
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "in_list_view": 1,
+   "label": "Email",
+   "reqd": 1
   },
   {
    "default": "+48",
    "fieldname": "telefon_kontaktowy",
    "fieldtype": "Data",
-   "label": "Telefon Kontaktowy"
+   "in_list_view": 1,
+   "label": "Telefon Kontaktowy",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_xzvz",
@@ -174,29 +179,11 @@
    "fieldtype": "Table",
    "label": "Serwisowane Urz\u0105dzenia",
    "options": "Tabela Zgloszenia RMA"
-  },
-  {
-   "fieldname": "section_break_dmbc",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "nr_fakturyparagonu",
-   "fieldtype": "Data",
-   "label": "Nr Faktury/Paragonu"
-  },
-  {
-   "fieldname": "column_break_gkcg",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "data_zakupu",
-   "fieldtype": "Date",
-   "label": "Data Zakupu"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-20 23:42:57.185379",
+ "modified": "2024-08-22 18:37:36.956613",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

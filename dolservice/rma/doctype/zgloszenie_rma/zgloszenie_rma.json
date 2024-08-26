@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_events_in_timeline": 1,
  "autoname": "format:RMA {####}/{YY}",
  "creation": "2024-08-06 11:42:26.940628",
  "doctype": "DocType",
@@ -199,7 +200,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-22 21:23:09.815798",
+ "modified": "2024-08-26 09:43:39.799898",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",
@@ -221,5 +222,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

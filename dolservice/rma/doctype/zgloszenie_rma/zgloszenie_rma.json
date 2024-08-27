@@ -6,7 +6,6 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "zakonczone",
   "section_break_vynt",
   "otrzymano_na_magazynie",
   "otrzymano_na_serwisie",
@@ -38,12 +37,6 @@
  ],
  "fields": [
   {
-   "default": "0",
-   "fieldname": "zakonczone",
-   "fieldtype": "Check",
-   "label": "Zako\u0144czone?"
-  },
-  {
    "collapsible": 1,
    "fieldname": "section_break_vynt",
    "fieldtype": "Section Break"
@@ -66,6 +59,7 @@
   {
    "fieldname": "wydane_z_magazynu",
    "fieldtype": "Datetime",
+   "in_list_view": 1,
    "label": "Wydane z Magazynu"
   },
   {
@@ -81,21 +75,18 @@
    "default": "Firma",
    "fieldname": "podmiot",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Podmiot",
    "options": "Firma\nOsoba"
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Email"
   },
   {
    "default": "+48",
    "fieldname": "telefon_kontaktowy",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Telefon Kontaktowy"
   },
   {
@@ -195,12 +186,13 @@
   {
    "fieldname": "nazwa_podmiotu",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Imie Nazwisko/Nazwa Firmy"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-26 09:43:39.799898",
+ "modified": "2024-08-27 10:08:22.022795",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

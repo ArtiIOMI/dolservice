@@ -15,4 +15,18 @@ frappe.ui.form.on("Zgloszenie RMA", {
         //const tour_name = 'Poradnik Zgłoszenia RMA';
         //frm.tour.init({ tour_name }).then(() => frm.tour.start());
     },
+    workflow_state: function(frm) {
+	if(frm.doc.workflow_state == "Przyjęta"){
+		frm.set_value('otrzymano_na_magazynie', frappe.datetime.now_datetime())
+	}
+	if(frm.doc.workflow_state == "Na Serwisie"){
+		frm.set_value('otrzymano_na_serwisie', frappe.datetime.now_datetime())
+	}
+	if(frm.doc.workflow_state == "W Pakowni"){
+		frm.set_value('wydane_z_serwisu', frappe.datetime.now_datetime());
+	}
+	if(frm.doc.workflow_state == "W Pakowni"){
+		frm.set_value('wydane_z_serwisu', frappe.datetime.now_datetime());
+	}
+    },
 });

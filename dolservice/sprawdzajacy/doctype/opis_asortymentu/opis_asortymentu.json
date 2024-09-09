@@ -32,7 +32,6 @@
  ],
  "fields": [
   {
-   "depends_on": "eval: doc.creation == null",
    "fieldname": "barcode",
    "fieldtype": "Data",
    "label": "Skaner",
@@ -160,7 +159,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-05 08:01:37.960326",
+ "modified": "2024-09-09 20:33:24.959998",
  "modified_by": "Administrator",
  "module": "Sprawdzajacy",
  "name": "Opis Asortymentu",

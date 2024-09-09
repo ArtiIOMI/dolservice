@@ -10,7 +10,6 @@
   "nr_seryjny",
   "item_code",
   "column_break_uxie",
-  "status_uslugi",
   "typ_uslugi",
   "skrot",
   "grade_wykonania",
@@ -49,6 +48,7 @@
    "fieldname": "item_code",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Model",
    "options": "Item",
@@ -65,6 +65,7 @@
   {
    "fieldname": "nr_seryjny",
    "fieldtype": "Data",
+   "in_preview": 1,
    "label": "Serial No",
    "reqd": 1
   },
@@ -87,6 +88,7 @@
   {
    "fieldname": "from_warehouse",
    "fieldtype": "Link",
+   "in_preview": 1,
    "label": "Sk\u0105d Zabrany Laptop",
    "options": "Warehouse"
   },
@@ -198,6 +200,7 @@
   {
    "fieldname": "grade_wykonania",
    "fieldtype": "Select",
+   "in_preview": 1,
    "label": "Grade Wykonania",
    "options": "\nA\nA-\nA=\nB\nB-\nC"
   },
@@ -205,7 +208,8 @@
    "fetch_from": "typ_uslugi.skr\u00f3t",
    "fieldname": "skrot",
    "fieldtype": "Data",
-   "is_virtual": 1,
+   "hidden": 1,
+   "in_preview": 1,
    "label": "Skr\u00f3t"
   },
   {
@@ -224,19 +228,12 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Nowa Nazwa"
-  },
-  {
-   "default": "W Naprawie",
-   "fieldname": "status_uslugi",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "W Naprawie\nOczekuje na p\u0142yt\u0119\nOczekuje na cz\u0119\u015bci\nSprawdzony\nNaprawiony\nWydany"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-19 23:44:06.047351",
+ "modified": "2024-09-09 20:20:23.004578",
  "modified_by": "Administrator",
  "module": "Serwis",
  "name": "Wykonanie Uslugi",

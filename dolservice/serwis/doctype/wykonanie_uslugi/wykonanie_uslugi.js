@@ -179,28 +179,36 @@ function self_filling(frm)
 function rename_doc(frm)
 {
    $('.primary-action').prop('disabled', true);
-   frappe.db.get_list(frm.doctype, {fields: ['name'], limit: 100, filters: {'name': ["like", "%"+frm.doc.nr_seryjny+"%"], 'typ_uslugi': ["like", "%"+frm.doc.typ_uslugi+"%"]}}).then(res => 
-   {
-      let w1 = res.length;
-      if(w1 > 1)
-      {
-         frappe.confirm('Czy chcesz stworzyć '+res.length+' usługę z tym numerem seryjnym?',
-            () => 
-            {
-               frm.save('Submit').then(() => {
+   var sn = frm.doc.nr_seryjny; //serial number
+   var shortcut = cur_frm.doc.skrot;
 
-                  if(w1 < 10){ w1 = '0'+w1; }
-                  var w2 = frm.doc.name.split('-').join(w1+"-");
+   frappe.db.get_list(frm.doctype, {fields: ['name'], limit: 100, filters: {'nr_seryjny': cur_frm.doc.nr_seryjny, 'typ_uslugi': cur_frm.doc.typ_uslugi}}).then(res => 
+   {
+      let doc_count = res.length; // liczba dokumentow
+
+      if(doc_count > 1)
+      {
+         frappe.confirm(`Czy chcesz stworzyć ${doc_count} usługę z tym numerem seryjnym?`,
+            () => {
+               frm.save('Submit').then(() => 
+               {
+
+                  if(doc_count < 10) 
+                  { 
+                     doc_count = '0' + doc_count; 
+                  }
+
+                  var new_name = `${shortcut}${doc_count}-${sn}`; //new name
                   
                   frm.call({
                      method: "rename_doc",
-                     args: { new_name: w2, doctype: frm.doctype, name: frm.doc.name},
+                     args: { new_name: new_name, doctype: frm.doctype, name: frm.doc.name},
                      callback: function(r) 
                      {
                         if(r.message){
-                        frappe.set_route('Form', frm.doctype, w2);
+                        frappe.set_route('Form', frm.doctype, new_name);
                         } else {
-                           frappe.throw(__("Podczas zmiany nazwy na {0} wystąpił błąd", [w2]));
+                           frappe.throw(__("Podczas zmiany nazwy na {0} wystąpił błąd", [new_name]));
                         }
                      }
                   });
@@ -217,19 +225,18 @@ function rename_doc(frm)
       }
       else
       {
-         if(w1 < 10){ w1 = '0'+w1; }
-         var w2 = frm.doc.name.split('-').join(w1+"-");
+         var new_name = `${shortcut}01-${sn}`; //new name
                
          frm.save('Submit').then(() => {
             frm.call({
                method: "rename_doc",
-               args: { new_name: w2, doctype: frm.doctype, name: frm.doc.name},
+               args: { new_name: new_name, doctype: frm.doctype, name: frm.doc.name},
                callback: function(r) 
                { 
                   if(r.message){
-                     frappe.set_route('Form', frm.doctype, w2);
+                     frappe.set_route('Form', frm.doctype, new_name);
                   } else {
-                     frappe.throw(__("Podczas zmiany nazwy na {0} wystąpił błąd", [w2]));
+                     frappe.throw(__("Podczas zmiany nazwy na {0} wystąpił błąd", [new_name]));
                   }
                }
             });

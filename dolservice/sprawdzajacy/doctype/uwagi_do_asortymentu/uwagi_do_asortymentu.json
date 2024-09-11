@@ -17,7 +17,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Nazwa Element",
-   "options": "\nPalmrest\nBody\nKlapa\nMatryca\nZawiasy\nKlawiatura\nTouchPad\nSp\u00f3d\nInne",
+   "options": "\nPalmrest\nBody\nKlapa\nMatryca\nZawiasy\nKlawiatura\nTouchPad\nSp\u00f3d\nInne\nRamka",
    "sort_options": 1
   },
   {
@@ -35,7 +35,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-21 21:05:21.761816",
+ "modified": "2024-09-11 18:49:35.109842",
  "modified_by": "Administrator",
  "module": "Sprawdzajacy",
  "name": "Uwagi do asortymentu",

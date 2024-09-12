@@ -241,7 +241,7 @@
   },
   {
    "fieldname": "description",
-   "fieldtype": "Long Text",
+   "fieldtype": "Text",
    "label": "Opis Usterki"
   },
   {
@@ -257,7 +257,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-12 09:40:28.668619",
+ "modified": "2024-09-12 10:44:41.055865",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

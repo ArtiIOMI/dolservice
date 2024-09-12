@@ -1,6 +1,6 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "format:M-RMA {####}/{YY}",
  "creation": "2024-09-12 09:05:41.280113",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -88,10 +88,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-12 09:17:49.027106",
+ "modified": "2024-09-12 20:25:30.334736",
  "modified_by": "Administrator",
  "module": "DolService",
  "name": "Zgloszenie Multi-RMA",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -109,5 +110,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

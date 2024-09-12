@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-12 09:05:41.280113",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "podmiot",
+  "email",
+  "telefon_kontaktowy",
+  "column_break_pnhs",
+  "nazwa_podmiotu",
+  "adres",
+  "section_break_nqsx",
+  "serwisowane_urz\u0105dzenia",
+  "section_break_vsjq",
+  "regulamin",
+  "dane_osobowe"
+ ],
+ "fields": [
+  {
+   "fieldname": "podmiot",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Podmiot",
+   "options": "Firma\nOsoba"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "telefon_kontaktowy",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "Telefon Kontaktowy"
+  },
+  {
+   "fieldname": "column_break_pnhs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "nazwa_podmiotu",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Imie Nazwisko/Nazwa Firmy"
+  },
+  {
+   "fieldname": "adres",
+   "fieldtype": "Small Text",
+   "in_preview": 1,
+   "label": "Adres"
+  },
+  {
+   "fieldname": "section_break_nqsx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "serwisowane_urz\u0105dzenia",
+   "fieldtype": "Table",
+   "label": "Serwisowane Urz\u0105dzenia",
+   "options": "Tabela Zgloszenia RMA"
+  },
+  {
+   "fieldname": "section_break_vsjq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "regulamin",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Regulamin"
+  },
+  {
+   "default": "0",
+   "fieldname": "dane_osobowe",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Dane osobowe"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-09-12 09:17:49.027106",
+ "modified_by": "Administrator",
+ "module": "DolService",
+ "name": "Zgloszenie Multi-RMA",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -24,9 +24,7 @@ def get_data(filters=None):
 			"nr_seryjny", 
 			"uklad_klawiatury", 
 			"podswietlana_klawiatura", 
-			"trackpoint",
-			"bateria_nr1", 
-			"bateria_nr2"
+			"trackpoint"
 		],
 		filters={"dostawa": filters.dostawa}
 	)

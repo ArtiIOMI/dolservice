@@ -25,8 +25,8 @@ def get_data(filters=None):
 			"uklad_klawiatury", 
 			"podswietlana_klawiatura", 
 			"trackpoint",
-			"zywotnosc_baterii_nr1", 
-			"zywotnosc_baterii_nr2"
+			"bateria_nr1", 
+			"bateria_nr2"
 		],
 		filters={"dostawa": filters.dostawa}
 	)
@@ -56,8 +56,8 @@ def get_data(filters=None):
 		row["dysk"] = podajWartosc("Dysk", tabKon)
 		row["matryca"] = podajWartosc("Matryca", tabKon)
 		row["grafika"] = podajWartosc("Grafika", tabKon)
-		row["zywotnosc_baterii_nr1"] = podajWartosc("Bateria Nr. 1", tabKon)
-		row["zywotnosc_baterii_nr2"] = podajWartosc("Bateria Nr. 2", tabKon)
+		row["bateria_nr1"] = podajWartosc("Bateria Nr. 1", tabKon)
+		row["bateria_nr2"] = podajWartosc("Bateria Nr. 2", tabKon)
 
 		row["uszkodzenia"] = ""
 
@@ -151,13 +151,13 @@ def get_columns(filters=None):
 		"fieldtype": "Data",
 		},
 		{
-		"label": "Bateria Nr.1",
-		"fieldname": "zywotnosc_baterii_nr1",
+		"label": "Bateria Nr. 1",
+		"fieldname": "bateria_nr1",
 		"fieldtype": "Data",
 		},
 		{
-		"label": "Bateria Nr.2",
-		"fieldname": "zywotnosc_baterii_nr2",
+		"label": "Bateria Nr. 2",
+		"fieldname": "bateria_nr2",
 		"fieldtype": "Data",
 		},
 		{
@@ -185,5 +185,5 @@ def get_columns(filters=None):
 
 def podajWartosc(klucz, tabela):
     for tab in tabela:
-        if tab["komponent"].lower() == klucz.lower():
-            return tab["opis_konfiguracji"]
+        if tab.komponent.lower() == klucz.lower():
+            return tab.opis_konfiguracji

@@ -12,6 +12,9 @@ frappe.ui.form.on("Zgloszenie RMA", {
         frm.set_df_property('email', 'reqd', 'true');
         frm.set_df_property('serwisowane_urządzenia', 'reqd', 'true');
 
+		if(frm.doc.creation < "2024-10-23")
+		frm.set_df_property('serwisowane_urządzenia', 'hidden', true);
+
         //const tour_name = 'Poradnik Zgłoszenia RMA';
         //frm.tour.init({ tour_name }).then(() => frm.tour.start());
     },

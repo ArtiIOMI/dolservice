@@ -170,7 +170,6 @@
    "label": "Opis usterek"
   },
   {
-   "depends_on": "cur_frm.doc.creation < \"\"",
    "fieldname": "section_break_abkc",
    "fieldtype": "Section Break"
   },
@@ -257,7 +256,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-12 10:44:41.055865",
+ "modified": "2024-10-28 12:35:46.823739",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

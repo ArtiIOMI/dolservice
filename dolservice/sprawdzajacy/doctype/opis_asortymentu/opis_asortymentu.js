@@ -124,7 +124,7 @@ frappe.ui.form.on("Opis Asortymentu", {
                 //Model
                  
                 var model;
-                frappe.db.get_list('Item', {fields: ['name','item_name'], limit: 10, filters: {'item_name': ["like", "%"+dane[0]+"%"]}}).then(res => {
+                frappe.db.get_list('Item', {fields: ['name','item_name'], limit: 10, filters: {'item_name': ["like", "%"+dane[0]]}}).then(res => {
 
                     if(res[0] != null)
                     {

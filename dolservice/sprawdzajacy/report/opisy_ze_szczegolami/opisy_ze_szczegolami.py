@@ -188,7 +188,7 @@ def get_columns(filters=None):
 		{
 		"label": "Zmodyfikowano",
 		"fieldname": "modified",
-		"fieldtype": "Date",
+		"fieldtype": "Datetime",
 		},
 	]
 	return columns

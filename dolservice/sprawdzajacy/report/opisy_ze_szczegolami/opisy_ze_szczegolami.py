@@ -31,7 +31,7 @@ def get_data(filters=None):
 			"grade_matrycy": filters.grade_matrycy, 
 			"grade_obudowy": filters.grade_obudowy,
 			"uklad_klawiatury": filters.uklad_klawiatury,
-			"modified": filters.modified
+			"modified": ['between', [filters.from_date, filters.to_date]]
 			}
 	)
 
@@ -47,6 +47,7 @@ def get_data(filters=None):
 			"uklad_klawiatury": opis.uklad_klawiatury,
 			"podswietlana_klawiatura": opis.podswietlana_klawiatura,
 			"trackpoint": opis.trackpoint,
+			"modified": opis.modified
 		}
 
 		tabKon = frappe.get_all(
@@ -183,6 +184,11 @@ def get_columns(filters=None):
 		"label": "Uszkodzenia",
 		"fieldname": "uszkodzenia",
 		"fieldtype": "Data",
+		},
+		{
+		"label": "Zmodyfikowano",
+		"fieldname": "modified",
+		"fieldtype": "Date",
 		},
 	]
 	return columns

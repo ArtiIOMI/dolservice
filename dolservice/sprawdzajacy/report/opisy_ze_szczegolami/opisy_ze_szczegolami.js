@@ -44,6 +44,14 @@ frappe.query_reports["Opisy ze szczegółami"] = {
 				'Inne',
 				'PL'
 				],
+		},
+		{
+			"fieldname": "modified",
+			"label": __("Zmienione"),
+			"fieldtype": "Date",
+			"width": 50,
+			"reqd": 0,
+			"default": "",
 		}
 	]
 };

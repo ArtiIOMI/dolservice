@@ -24,12 +24,14 @@ def get_data(filters=None):
 			"nr_seryjny", 
 			"uklad_klawiatury", 
 			"podswietlana_klawiatura", 
-			"trackpoint"
+			"trackpoint",
+			"modified",
 		],
 		filters={
 			"grade_matrycy": filters.grade_matrycy, 
 			"grade_obudowy": filters.grade_obudowy,
-			"uklad_klawiatury": filters.uklad_klawiatury
+			"uklad_klawiatury": filters.uklad_klawiatury,
+			"modified": filters.modified
 			}
 	)
 

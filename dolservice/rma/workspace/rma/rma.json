@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"ZiC8y4VQHB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">RMA</span>\",\"col\":12}},{\"id\":\"ovD9K-sIFc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Zgloszenie Rma\",\"col\":3}}]",
+ "content": "[{\"id\":\"ZiC8y4VQHB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">RMA</span>\",\"col\":12}},{\"id\":\"ovD9K-sIFc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Zgloszenie Rma\",\"col\":3}},{\"id\":\"1wp0HwS4ic\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Zgloszenie Multi Rma\",\"col\":3}}]",
  "creation": "2024-08-20 19:03:41.747069",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "RMA",
  "links": [],
- "modified": "2024-08-20 19:12:21.888165",
+ "modified": "2024-11-14 15:50:46.719624",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "RMA",
@@ -31,6 +31,12 @@
   },
   {
    "role": "Serwisant"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Customer"
   }
  ],
  "sequence_id": 2.0,
@@ -40,6 +46,14 @@
    "doc_view": "List",
    "label": "Zgloszenie Rma",
    "link_to": "Zgloszenie RMA",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Zgloszenie Multi Rma",
+   "link_to": "Zgloszenie Multi-RMA",
    "stats_filter": "[]",
    "type": "DocType"
   }

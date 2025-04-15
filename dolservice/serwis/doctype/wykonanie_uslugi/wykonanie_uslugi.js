@@ -5,7 +5,7 @@ frappe.ui.form.on("Wykonanie Uslugi", {
 
    refresh: function(frm)
     {
-      //Ustawianie statusu tylko gdzy dokument został chociaż raz zapisany
+      //Ustawianie statusu tylko gdy dokument został chociaż raz zapisany
       if(frm.is_new())
       {
          cur_frm.set_df_property('status_uslugi', 'reqd', false);
@@ -106,6 +106,17 @@ frappe.ui.form.on("Wykonanie Uslugi", {
          cur_frm.set_df_property('wykonal_naprawe', 'hidden', 0);
          cur_frm.set_df_property('wykonal_naprawe', 'reqd', 1)
       }
+      
+      if(cur_frm.doc.typ_uslugi && cur_frm.doc.typ_uslugi.includes("Płyty"))
+      {
+            cur_frm.fields_dict.magazyn_section.collapse(false);
+            cur_frm.toggle_display("from_warehouse", false);
+            cur_frm.toggle_display("na_magazynie", true);
+      } else {
+            cur_frm.fields_dict.magazyn_section.collapse(true);
+            cur_frm.toggle_display("from_warehouse", true);
+            cur_frm.toggle_display("na_magazynie", false);
+      }
 
       // cur_frm.refresh_fields();
       //Ukrywa tabele cześci
@@ -115,6 +126,10 @@ frappe.ui.form.on("Wykonanie Uslugi", {
    before_submit: function(frm){
       frappe.validated = false;
       rename_doc(frm);
+   }
+
+   on_submit: function(frm){
+      find_motherboard(frm.doc.nr_seryjny);
    }
 
 });
@@ -260,4 +275,20 @@ function operation_new_sn(frm)
 
 
 
+}
+
+function find_motherboard(sn){
+   frappe.db.get_list(cur_frm.doctype, {fields: ['name'], 
+                                          limit: 10, 
+                                          filters: {'nr_seryjny': sn, 
+                                                   'typ_uslugi': ["like", "%"+"Płyty"+"%"]
+                                                   },
+                                          order_by: 'name',
+                                       })
+   .then(res => { 
+   let doc_count = res.length;
+   let doc_name = res[doc_count];
+   //pobrać dokumęt i zmienić w nim status na magazynie!
+   }
+   );
 }

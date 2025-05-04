@@ -81,6 +81,11 @@ frappe.ui.form.on("Wykonanie Uslugi", {
          });
          frm.fields_dict["uwagi"].grid.grid_buttons.find('.btn-custom').removeClass('btn-default').addClass('btn-primary').addClass('hidden');
       }
+
+      if(cur_frm.doc.typ_uslugi && cur_frm.doc.typ_uslugi.includes("Płyty"))
+      {
+         cur_frm.fields_dict.magazyn_section.collapse(false);
+      }
    },
 
    nr_seryjny: function(frm) 
@@ -126,12 +131,8 @@ frappe.ui.form.on("Wykonanie Uslugi", {
    before_submit: function(frm){
       frappe.validated = false;
       rename_doc(frm);
+      frappe.msgprint(__('Document updated successfully'));
    }
-
-   on_submit: function(frm){
-      find_motherboard(frm.doc.nr_seryjny);
-   }
-
 });
 
 function clone_tables(opis_name)
@@ -207,6 +208,10 @@ function rename_doc(frm)
             () => {
                frm.save('Submit').then(() => 
                {
+                  if(!frm.doc.typ_uslugi.includes("Płyty"))
+                  {
+                     find_motherboard(frm.doc.nr_seryjny);
+                  }
 
                   if(doc_count < 10) 
                   { 
@@ -278,17 +283,23 @@ function operation_new_sn(frm)
 }
 
 function find_motherboard(sn){
+   console.log("tah");
    frappe.db.get_list(cur_frm.doctype, {fields: ['name'], 
-                                          limit: 10, 
-                                          filters: {'nr_seryjny': sn, 
-                                                   'typ_uslugi': ["like", "%"+"Płyty"+"%"]
-                                                   },
-                                          order_by: 'name',
-                                       })
-   .then(res => { 
-   let doc_count = res.length;
-   let doc_name = res[doc_count];
-   //pobrać dokumęt i zmienić w nim status na magazynie!
-   }
-   );
+         limit: 10, 
+         filters: {'nr_seryjny': sn, 
+                  'typ_uslugi': ["like", "%"+"Płyty"+"%"]
+                  },
+         order_by: 'name'
+
+      }).then(res => { 
+         if(res.length > 0){
+            let doc_name = res[length].name;
+
+            frappe.db.get_value(cur_frm.doctype,doc_name,"na_magazynie").then(res => {
+               if(res.message.na_magazynie == 1)
+                  frappe.db.set_value('Wykonanie Uslugi',doc_name,'na_magazynie',0);
+            });
+         }
+      //pobrać dokumęt i zmienić w nim status na magazynie!
+   });
 }

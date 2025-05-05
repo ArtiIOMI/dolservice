@@ -131,7 +131,13 @@ frappe.ui.form.on("Wykonanie Uslugi", {
    before_submit: function(frm){
       frappe.validated = false;
       rename_doc(frm);
-      frappe.msgprint(__('Document updated successfully'));
+   },
+
+   on_submit: function(frm){
+      if(!frm.doc.typ_uslugi.includes("Płyty"))
+      {
+         find_motherboard(frm.doc.nr_seryjny);
+      }
    }
 });
 
@@ -206,13 +212,9 @@ function rename_doc(frm)
       {
          frappe.confirm(`Czy chcesz stworzyć ${doc_count} usługę z tym numerem seryjnym?`,
             () => {
+               frm.trigger('on_submit');
                frm.save('Submit').then(() => 
                {
-                  if(!frm.doc.typ_uslugi.includes("Płyty"))
-                  {
-                     find_motherboard(frm.doc.nr_seryjny);
-                  }
-
                   if(doc_count < 10) 
                   { 
                      doc_count = '0' + doc_count; 
@@ -278,12 +280,9 @@ function operation_new_sn(frm)
    
    frm.copy_doc();
 
-
-
 }
 
 function find_motherboard(sn){
-   console.log("tah");
    frappe.db.get_list(cur_frm.doctype, {fields: ['name'], 
          limit: 10, 
          filters: {'nr_seryjny': sn, 

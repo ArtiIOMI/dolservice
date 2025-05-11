@@ -1,6 +1,8 @@
 // Copyright (c) 2024, Artiom and contributors
 // For license information, please see license.txt
 
+//Dodać przycisk z Dzieckiem RMA lub Polazać w liście Dziecko RMA za pomocą JS
+
 frappe.ui.form.on("Zgloszenie Multi-RMA", {
 	refresh(frm) {
       czy_posiada_RMA(frm);

@@ -5,7 +5,7 @@ frappe.ui.form.on("Wykonanie Uslugi", {
 
    refresh: function(frm)
     {
-      //Ustawianie statusu tylko gdzy dokument został chociaż raz zapisany
+      //Ustawianie statusu tylko gdy dokument został chociaż raz zapisany
       if(frm.is_new())
       {
          cur_frm.set_df_property('status_uslugi', 'reqd', false);
@@ -81,6 +81,11 @@ frappe.ui.form.on("Wykonanie Uslugi", {
          });
          frm.fields_dict["uwagi"].grid.grid_buttons.find('.btn-custom').removeClass('btn-default').addClass('btn-primary').addClass('hidden');
       }
+
+      if(cur_frm.doc.typ_uslugi && cur_frm.doc.typ_uslugi.includes("Płyty"))
+      {
+         cur_frm.fields_dict.magazyn_section.collapse(false);
+      }
    },
 
    nr_seryjny: function(frm) 
@@ -106,6 +111,17 @@ frappe.ui.form.on("Wykonanie Uslugi", {
          cur_frm.set_df_property('wykonal_naprawe', 'hidden', 0);
          cur_frm.set_df_property('wykonal_naprawe', 'reqd', 1)
       }
+      
+      if(cur_frm.doc.typ_uslugi && cur_frm.doc.typ_uslugi.includes("Płyty"))
+      {
+            cur_frm.fields_dict.magazyn_section.collapse(false);
+            cur_frm.toggle_display("from_warehouse", false);
+            cur_frm.toggle_display("na_magazynie", true);
+      } else {
+            cur_frm.fields_dict.magazyn_section.collapse(true);
+            cur_frm.toggle_display("from_warehouse", true);
+            cur_frm.toggle_display("na_magazynie", false);
+      }
 
       // cur_frm.refresh_fields();
       //Ukrywa tabele cześci
@@ -115,8 +131,14 @@ frappe.ui.form.on("Wykonanie Uslugi", {
    before_submit: function(frm){
       frappe.validated = false;
       rename_doc(frm);
-   }
+   },
 
+   on_submit: function(frm){
+      if(!frm.doc.typ_uslugi.includes("Płyty"))
+      {
+         find_motherboard(frm.doc.nr_seryjny);
+      }
+   }
 });
 
 function clone_tables(opis_name)
@@ -190,9 +212,9 @@ function rename_doc(frm)
       {
          frappe.confirm(`Czy chcesz stworzyć ${doc_count} usługę z tym numerem seryjnym?`,
             () => {
+               frm.trigger('on_submit');
                frm.save('Submit').then(() => 
                {
-
                   if(doc_count < 10) 
                   { 
                      doc_count = '0' + doc_count; 
@@ -258,6 +280,25 @@ function operation_new_sn(frm)
    
    frm.copy_doc();
 
+}
 
+function find_motherboard(sn){
+   frappe.db.get_list(cur_frm.doctype, {fields: ['name'], 
+         limit: 10, 
+         filters: {'nr_seryjny': sn, 
+                  'typ_uslugi': ["like", "%"+"Płyty"+"%"]
+                  },
+         order_by: 'name'
 
+      }).then(res => { 
+         if(res.length > 0){
+            let doc_name = res[length].name;
+
+            frappe.db.get_value(cur_frm.doctype,doc_name,"na_magazynie").then(res => {
+               if(res.message.na_magazynie == 1)
+                  frappe.db.set_value('Wykonanie Uslugi',doc_name,'na_magazynie',0);
+            });
+         }
+      //pobrać dokumęt i zmienić w nim status na magazynie!
+   });
 }

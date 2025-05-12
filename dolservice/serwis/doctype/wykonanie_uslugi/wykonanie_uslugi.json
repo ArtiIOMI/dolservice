@@ -14,6 +14,8 @@
   "skrot",
   "grade_wykonania",
   "magazyn_section",
+  "na_magazynie",
+  "column_break_pqio",
   "from_warehouse",
   "section_break_ydjw",
   "naprawione",
@@ -228,12 +230,23 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Nowa Nazwa"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "na_magazynie",
+   "fieldtype": "Check",
+   "label": "Na Magazynie"
+  },
+  {
+   "fieldname": "column_break_pqio",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-09 20:20:23.004578",
+ "modified": "2025-05-04 20:19:22.698796",
  "modified_by": "Administrator",
  "module": "Serwis",
  "name": "Wykonanie Uslugi",
@@ -257,6 +270,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

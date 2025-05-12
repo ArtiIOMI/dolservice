@@ -75,7 +75,14 @@ frappe.ui.form.on("Opis Asortymentu", {
         //frappe.db.get_doc('Serial No',frm.doc.nr_seryjny).then(res => { if() console.log(res.purchase_document_no) });
         frappe.db.exists(cur_frm.doc.doctype ,"Opis-"+cur_frm.doc.nr_seryjny).then(res => {
             if(res){
-                cur_frm.set_df_property('nr_seryjny', 'description', '<b><span style="color: red;">Taki <a href=Opis-'+cur_frm.doc.nr_seryjny+'>nr. seryjny</a> już został wpisany!!!</span></b>')
+                if(cur_frm.docname!='Opis-'+cur_frm.doc.nr_seryjny)
+                {
+                    cur_frm.set_df_property('nr_seryjny', 'description', '<b><span style="color: red;">Taki <a href=Opis-'+cur_frm.doc.nr_seryjny+'>nr. seryjny</a> już został wpisany!!!</span></b>');
+                }
+            } 
+            else 
+            {
+                cur_frm.set_df_property('nr_seryjny', 'description', false);
             }
         });
 
@@ -117,7 +124,7 @@ frappe.ui.form.on("Opis Asortymentu", {
                 //Model
                  
                 var model;
-                frappe.db.get_list('Item', {fields: ['name','item_name'], limit: 10, filters: {'item_name': ["like", "%"+dane[0]+"%"]}}).then(res => {
+                frappe.db.get_list('Item', {fields: ['name','item_name'], limit: 10, filters: {'item_name': ["like", "%"+dane[0]]}}).then(res => {
 
                     if(res[0] != null)
                     {

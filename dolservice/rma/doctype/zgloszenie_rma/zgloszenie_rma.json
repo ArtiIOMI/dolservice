@@ -1,11 +1,17 @@
 {
  "actions": [],
  "allow_events_in_timeline": 1,
- "autoname": "format:RMA {####}/{YY}",
+ "autoname": "format:{parent_rma}/{#}",
  "creation": "2024-08-06 11:42:26.940628",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "informacje_tab",
+  "section_break_osqo",
+  "regulamin",
+  "dane_osobowe",
+  "column_break_suph",
+  "parent_rma",
   "section_break_vynt",
   "otrzymano_na_magazynie",
   "otrzymano_na_serwisie",
@@ -29,11 +35,6 @@
   "description",
   "section_break_abkc",
   "serwisowane_urz\u0105dzenia",
-  "section_break_osqo",
-  "regulamin",
-  "dane_osobowe",
-  "column_break_suph",
-  "parent_rma",
   "wyposa\u017cenie_tab",
   "opakowanie",
   "zasilacz",
@@ -50,6 +51,7 @@
    "collapsible": 1,
    "fieldname": "section_break_vynt",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Linia Czasowa"
   },
   {
@@ -252,11 +254,16 @@
    "fieldtype": "Link",
    "label": "Multi-RMA",
    "options": "Zgloszenie Multi-RMA"
+  },
+  {
+   "fieldname": "informacje_tab",
+   "fieldtype": "Tab Break",
+   "label": "Informacje"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-28 12:35:46.823739",
+ "modified": "2025-05-12 00:14:56.423105",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",
@@ -276,6 +283,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

@@ -27,7 +27,8 @@ function send_to_RMAs(){
 
 //Dzieli Jedno zbiorcze RMA na Klilka miejszych, ilość zależna od wierszy w tabeli
 function split_RMA(frm){
-   for(var i = 0; i<cur_frm.doc.serwisowane_urządzenia.length; i++){
+   var a=0;
+   for(var i=0; i<cur_frm.doc.serwisowane_urządzenia.length; i++){
       frappe.db.insert({
          doctype: 'Zgloszenie RMA',
          podmiot: cur_frm.doc.podmiot,
@@ -43,11 +44,14 @@ function split_RMA(frm){
          description: cur_frm.doc.serwisowane_urządzenia[i].opis_usterki,
          parent_rma: cur_frm.doc.name
       }).then(function(doc) {
-         frm.doc.serwisowane_urządzenia[i].child_rma = doc.name;
+         console.log(a);
+         cur_frm.doc.serwisowane_urządzenia[a].child_rma = doc.name;
+         a++;
+         if(cur_frm.doc.serwisowane_urządzenia.length == a){
+            cur_frm.refresh_fields(); cur_frm.dirty(); cur_frm.save();
+         }
          //console.log(`${doc.doctype} ${doc.name} created on ${doc.creation}`);
       });
    }
 
-   frm.dirty();
-   frm.save_or_update();
 }

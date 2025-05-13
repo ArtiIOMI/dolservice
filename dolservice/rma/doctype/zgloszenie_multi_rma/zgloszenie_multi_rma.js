@@ -43,8 +43,11 @@ function split_RMA(frm){
          description: cur_frm.doc.serwisowane_urządzenia[i].opis_usterki,
          parent_rma: cur_frm.doc.name
       }).then(function(doc) {
-         cur_frm.refresh();
+         frm.doc.serwisowane_urządzenia[i].child_rma = doc.name;
          //console.log(`${doc.doctype} ${doc.name} created on ${doc.creation}`);
       });
    }
+
+   frm.dirty();
+   frm.save_or_update();
 }

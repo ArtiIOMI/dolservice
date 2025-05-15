@@ -6,6 +6,7 @@
 frappe.ui.form.on("Zgloszenie Multi-RMA", {
 	refresh(frm) {
       czy_posiada_RMA(frm);
+      indicator_status(frm);
 	},
 });
 
@@ -54,4 +55,22 @@ function split_RMA(frm){
       });
    }
 
+}
+
+function indicator_status(frm){
+   var rows = frm.fields_dict['serwisowane_urządzenia'].get_value();
+      rows.forEach(row => {
+          frappe.db.get_doc('Zgloszenie RMA', row.child_rma).then(res=>{
+             row.status = res.workflow_state;
+          });
+      });
+
+      frm.set_indicator_formatter('child_rma', function (doc) {
+         if(doc.status == 'Odebrane') return 'green';
+         else if(doc.status == 'Na Serwisie') return 'orange';
+         else return 'blue';
+      });
+      setTimeout(() => {
+         frm.refresh_field('serwisowane_urządzenia');
+       }, "200");
 }

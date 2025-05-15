@@ -7,10 +7,6 @@ frappe.ui.form.on("Zgloszenie RMA", {
 	},
     onload: function(frm) {
         //frm.set_df_property('otrzymano_na_magazynie', 'reqd', 'true');
-        frm.set_df_property('podmiot', 'reqd', 'true');
-        frm.set_df_property('nazwa_firmy', 'reqd', 'true');
-        frm.set_df_property('email', 'reqd', 'true');
-        frm.set_df_property('serwisowane_urządzenia', 'reqd', 'true');
 
 		if(frm.doc.creation > "2025-05-13")
 		frm.set_df_property('serwisowane_urządzenia', 'hidden', true);

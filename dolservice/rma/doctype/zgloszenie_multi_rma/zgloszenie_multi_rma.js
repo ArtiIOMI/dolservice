@@ -16,8 +16,6 @@ function czy_posiada_RMA(frm){
       .then(res => {         
          if(cur_frm.doc.serwisowane_urządzenia.length != res.length) //cur_frm.doc.serwisowane_urządzenia.length == res.length
             frm.add_custom_button(__("Podziel RMA"), () => split_RMA(frm));
-         else
-            frm.add_custom_button(__("Przejdz do mini-RMA"), () => send_to_RMAs());
       });
 }
 
@@ -66,11 +64,31 @@ function indicator_status(frm){
       });
 
       frm.set_indicator_formatter('child_rma', function (doc) {
-         if(doc.status == 'Odebrane') return 'green';
-         else if(doc.status == 'Na Serwisie') return 'orange';
-         else return 'blue';
+         if(doc.status == 'Przyjęty') 
+            return 'orange';
+         else if(doc.status == 'Zakończone' || doc.status == 'Korekta' || doc.status == 'Przeterminowane' || doc.status == 'Odebrane' || doc.status == 'Wysłane') 
+            return 'black';
+         else if(doc.status == 'Na Serwisie' || doc.status == 'W Konsultacji' || doc.status == 'W Naprawie') 
+            return 'light blue';
+         else if(doc.status == 'Naprawiony') 
+            return 'dark blue';
+         else if(doc.status == 'W Pakowni' || doc.status == 'Do Opłaty') 
+            return 'green';
+         else return null;
       });
+
+      
       setTimeout(() => {
          frm.refresh_field('serwisowane_urządzenia');
-       }, "200");
-}
+         indicator_status_tooltip(frm);
+      }, "200");
+   }
+
+   function indicator_status_tooltip(frm){
+      var rows = document.querySelector('[data-fieldname="serwisowane_urządzenia"]').querySelector('.grid-body').querySelectorAll('.data-row');
+         var j = 0;
+         rows.forEach(row =>{
+            row.querySelector('[data-fieldname="child_rma"]').querySelector('a').setAttribute('title', frm.doc.serwisowane_urządzenia[j].status);
+            j++;
+         });
+   }

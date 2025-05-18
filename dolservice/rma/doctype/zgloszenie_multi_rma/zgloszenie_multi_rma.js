@@ -67,9 +67,13 @@ function split_RMA(frm){
 function indicator_status(frm){
    var rows = frm.fields_dict['serwisowane_urządzenia'].get_value();
       rows.forEach(row => {
-          frappe.db.get_doc('Zgloszenie RMA', row.child_rma).then(res=>{
-             row.status = res.workflow_state;
-          });
+         console.log(row.child_rma);
+         if(row.child_rma !== '' && row.child_rma !== undefined){
+            frappe.db.get_doc('Zgloszenie RMA', row.child_rma).then(res=>{
+               row.status = res.workflow_state;
+            });
+         }
+
       });
 
       frm.set_indicator_formatter('child_rma', function (doc) {

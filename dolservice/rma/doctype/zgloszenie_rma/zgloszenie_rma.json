@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_events_in_timeline": 1,
- "autoname": "format:{parent_rma}/{#}",
+ "autoname": "format:{parent_rma}/{temp_number}",
  "creation": "2024-08-06 11:42:26.940628",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -35,6 +35,7 @@
   "description",
   "section_break_abkc",
   "serwisowane_urz\u0105dzenia",
+  "temp_number",
   "wyposa\u017cenie_tab",
   "opakowanie",
   "zasilacz",
@@ -259,11 +260,17 @@
    "fieldname": "informacje_tab",
    "fieldtype": "Tab Break",
    "label": "Informacje"
+  },
+  {
+   "fieldname": "temp_number",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "temp_number"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-12 00:14:56.423105",
+ "modified": "2025-05-18 22:04:46.209090",
  "modified_by": "Administrator",
  "module": "RMA",
  "name": "Zgloszenie RMA",

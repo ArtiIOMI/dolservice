@@ -6,7 +6,7 @@
 frappe.ui.form.on("Zgloszenie Multi-RMA", {
 	refresh(frm) {
       czy_posiada_RMA(frm);
-      indicator_status(frm);
+      //indicator_status(frm);
 	},
 });
 
@@ -26,34 +26,35 @@ function send_to_RMAs(){
 
 //Dzieli Jedno zbiorcze RMA na Klilka miejszych, ilość zależna od wierszy w tabeli
 function split_RMA(frm){
-   var a=0;
-   for(var i=0; i<cur_frm.doc.serwisowane_urządzenia.length; i++){
+   for(var i=0; i<frm.doc.serwisowane_urządzenia.length; i++){
       frappe.db.insert({
          doctype: 'Zgloszenie RMA',
-         podmiot: cur_frm.doc.podmiot,
-         nazwa_podmiotu: cur_frm.doc.nazwa_podmiotu,
-         email: cur_frm.doc.email,
-         telefon_kontaktowy: cur_frm.doc.telefon_kontaktowy,
-         adres: cur_frm.doc.adres,
-         paid: cur_frm.doc.serwisowane_urządzenia[i].paid,
-         item_name: cur_frm.doc.serwisowane_urządzenia[i].marka_model,
-         serial_no: cur_frm.doc.serwisowane_urządzenia[i].nr_seryjny,
-         sale_invoice:  cur_frm.doc.serwisowane_urządzenia[i].nr_fakturyparagonu,
-         sale_date: cur_frm.doc.serwisowane_urządzenia[i].data_zakupu,
-         description: cur_frm.doc.serwisowane_urządzenia[i].opis_usterki,
-         parent_rma: cur_frm.doc.name
-      }).then(function(doc) {
-         console.log(a);
-         cur_frm.doc.serwisowane_urządzenia[a].child_rma = doc.name;
-         a++;
-         if(cur_frm.doc.serwisowane_urządzenia.length == a){
-            cur_frm.refresh_fields(); cur_frm.dirty(); cur_frm.save();
-         }
-         //console.log(`${doc.doctype} ${doc.name} created on ${doc.creation}`);
+         temp_number: i+1,
+         podmiot: frm.doc.podmiot,
+         nazwa_podmiotu: frm.doc.nazwa_podmiotu,
+         email: frm.doc.email,
+         telefon_kontaktowy: frm.doc.telefon_kontaktowy,
+         adres: frm.doc.adres,
+         paid: frm.doc.serwisowane_urządzenia[i].paid,
+         item_name: frm.doc.serwisowane_urządzenia[i].marka_model,
+         serial_no: frm.doc.serwisowane_urządzenia[i].nr_seryjny,
+         sale_invoice:  frm.doc.serwisowane_urządzenia[i].nr_fakturyparagonu,
+         sale_date: frm.doc.serwisowane_urządzenia[i].data_zakupu,
+         description: frm.doc.serwisowane_urządzenia[i].opis_usterki,
+         parent_rma: frm.doc.name
+      })
+      .then(function(doc) {
+         frm.doc.serwisowane_urządzenia[doc.temp_number-1].child_rma = doc.name;
       });
    }
 
-}
+   setTimeout(()=>{
+      frm.refresh_fields(); 
+      frm.dirty(); 
+      frm.save();
+   }, 1000);
+} 
+
 
 function indicator_status(frm){
    var rows = frm.fields_dict['serwisowane_urządzenia'].get_value();

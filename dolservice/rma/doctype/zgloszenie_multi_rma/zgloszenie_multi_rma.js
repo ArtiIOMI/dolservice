@@ -6,7 +6,7 @@
 frappe.ui.form.on("Zgloszenie Multi-RMA", {
 	refresh(frm) {
       czy_posiada_RMA(frm);
-      //indicator_status(frm);
+      indicator_status(frm);
 	},
 });
 
@@ -26,6 +26,7 @@ function send_to_RMAs(){
 
 //Dzieli Jedno zbiorcze RMA na Klilka miejszych, ilość zależna od wierszy w tabeli
 function split_RMA(frm){
+   frappe.show_progress('Wpisywanie pojedyńczych RMA...', 0, frm.doc.serwisowane_urządzenia.length, 'Please wait');
    for(var i=0; i<frm.doc.serwisowane_urządzenia.length; i++){
       frappe.db.insert({
          doctype: 'Zgloszenie RMA',
@@ -46,12 +47,19 @@ function split_RMA(frm){
       .then(function(doc) {
          frm.doc.serwisowane_urządzenia[doc.temp_number-1].child_rma = doc.name;
       });
+      frappe.show_progress('Wpisywanie pojedyńczych RMA...', i, frm.doc.serwisowane_urządzenia.length, 'Proszę Czekać');
    }
 
    setTimeout(()=>{
-      frm.refresh_fields(); 
+      frappe.show_progress('Wpisywanie pojedyńczych RMA...', frm.doc.serwisowane_urządzenia.length, frm.doc.serwisowane_urządzenia.length, 'Ukończono', true);
+      
       frm.dirty(); 
       frm.save();
+      frm.reload_doc();
+
+      frappe.show_alert({message:__('RMA Poprawnie Podzielone!'),
+         indicator:'green'
+      }, 5);
    }, 1000);
 } 
 

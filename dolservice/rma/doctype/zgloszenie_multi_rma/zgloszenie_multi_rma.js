@@ -4,6 +4,21 @@
 //Dodać kolumne do tabeli z dziećmi RMA
 
 frappe.ui.form.on("Zgloszenie Multi-RMA", {
+   onload(frm) {
+      frm.set_indicator_formatter('child_rma', function (doc) {
+         if(doc.status == 'Przyjęty') 
+            return 'orange';
+         else if(doc.status == 'Zakończone' || doc.status == 'Korekta' || doc.status == 'Przeterminowane' || doc.status == 'Odebrane' || doc.status == 'Wysłane') 
+            return 'black';
+         else if(doc.status == 'Na Serwisie' || doc.status == 'W Konsultacji' || doc.status == 'W Naprawie') 
+            return 'light blue';
+         else if(doc.status == 'Naprawiony') 
+            return 'dark blue';
+         else if(doc.status == 'W Pakowni' || doc.status == 'Do Opłaty') 
+            return 'green';
+         else return null;
+      });
+   },
 	refresh(frm) {
       czy_posiada_RMA(frm);
       indicator_status(frm);
@@ -67,29 +82,12 @@ function split_RMA(frm){
 function indicator_status(frm){
    var rows = frm.fields_dict['serwisowane_urządzenia'].get_value();
       rows.forEach(row => {
-         console.log(row.child_rma);
          if(row.child_rma !== '' && row.child_rma !== undefined){
             frappe.db.get_doc('Zgloszenie RMA', row.child_rma).then(res=>{
                row.status = res.workflow_state;
             });
          }
-
       });
-
-      frm.set_indicator_formatter('child_rma', function (doc) {
-         if(doc.status == 'Przyjęty') 
-            return 'orange';
-         else if(doc.status == 'Zakończone' || doc.status == 'Korekta' || doc.status == 'Przeterminowane' || doc.status == 'Odebrane' || doc.status == 'Wysłane') 
-            return 'black';
-         else if(doc.status == 'Na Serwisie' || doc.status == 'W Konsultacji' || doc.status == 'W Naprawie') 
-            return 'light blue';
-         else if(doc.status == 'Naprawiony') 
-            return 'dark blue';
-         else if(doc.status == 'W Pakowni' || doc.status == 'Do Opłaty') 
-            return 'green';
-         else return null;
-      });
-
       
       setTimeout(() => {
          frm.refresh_field('serwisowane_urządzenia');

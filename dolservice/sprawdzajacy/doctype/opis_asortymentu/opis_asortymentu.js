@@ -16,6 +16,10 @@ class LaptopInfo {
 }
 
 frappe.ui.form.on("Opis Asortymentu", {
+    onload: function(frm){
+        load_username(frm);
+    },
+
     refresh: function(frm)
     {
         add_3_row(frm);
@@ -34,7 +38,7 @@ frappe.ui.form.on("Opis Asortymentu", {
         frm.fields_dict["konfiguracja"].grid.grid_buttons.find('.btn-custom').removeClass('btn-default').addClass('btn-primary');
 
         frm.add_custom_button(__("Drukuj"), function(){
-            PrintElem();
+            PrintElem(frm);
         }, __("Naklejka"));
         
         if(!frm.is_new())
@@ -256,7 +260,8 @@ function add_3_row(frm){
         frm.refresh_field("uszkodzenia");
     }
 }
-function PrintElem()
+
+function PrintElem(frm)
 {
     var nazwa = "";
     var procesor = "";
@@ -271,88 +276,90 @@ function PrintElem()
 
     var trdk = rdk.split('/');
 
-    if(!cur_frm.doc.nazwa_modelu){
-        frappe.db.get_value('Item', cur_frm.doc.item_name, 'item_name').then(r => {
-            nazwa = r.message.item_name;
-        });
+    if(!frm.doc.full_name_model){
+        nazwa = frm.doc.item_name;
     } else {
-        nazwa = cur_frm.doc.nazwa_modelu;
+        nazwa = frm.doc.full_name_model;
     }
 
-    frappe.db.get_value('User', cur_frm.doc.modified_by, 'username').then(r => {
-        autor = r.message.username;
-    });
+    var new_name = nazwa;
+    while (new_name.length > 24) {
+        new_name = new_name.split(" ");
+        new_name.shift();
+        new_name = new_name.join(" ");
+    }
+    nazwa = new_name;
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("Procesor" == row.komponent){
             procesor = row.opis_konfiguracji;
         }
     });
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("RAM" == row.komponent){
             trdk[0] = row.opis_konfiguracji;
         }
     });
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("Dysk" == row.komponent){
             trdk[1] = row.opis_konfiguracji;
         }
     });
     
-    if(cur_frm.doc.kamera){
+    if(frm.doc.kamera){
         trdk[2] = "KAM";
     }
 
     rdk = trdk.join(" / ");
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("Matryca" == row.komponent){
             martyca = row.opis_konfiguracji;
         }
     });
     
-    if(cur_frm.doc.dotykowa_matryca){
+    if(frm.doc.dotykowa_matryca){
         martyca += "-T";
     }
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("Grafika" == row.komponent){
             gpu = row.opis_konfiguracji;
         }
     });
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("Bateria Nr. 1" == row.komponent){
             bat1 = row.opis_konfiguracji;
         }
     });
     
-    cur_frm.doc.konfiguracja.forEach(function(row){
+    frm.doc.konfiguracja.forEach(function(row){
         if("Bateria Nr. 2" == row.komponent){
             bat2 = row.opis_konfiguracji;
         }
     });
     
-    if(cur_frm.doc.podswietlana_klawiatura){
+    if(frm.doc.podswietlana_klawiatura){
         podswietlanie = "Pdś";
     }
     else {
         podswietlanie = "Niepdś";
     }
     
-    if(cur_frm.doc.trackpoint){
+    if(frm.doc.trackpoint){
         trackpoint = "TrP";
     }
     
-    cur_frm.doc.uszkodzenia.forEach(function(row){
+    frm.doc.uszkodzenia.forEach(function(row){
         if(row.nazwa_uszkodzenia){
             opis += row.nazwa_uszkodzenia+(row.opis?": "+row.opis:"")+".";
         }
     });
     
-    cur_frm.doc.uwagi.forEach(function(row){
+    frm.doc.uwagi.forEach(function(row){
         if(row.element_obudowy){
             opis += row.element_obudowy+(row.opis?": "+row.opis:"")+".";
         }
@@ -370,7 +377,7 @@ function PrintElem()
         let currentDate = `${day}.${month}.${year}`;
         
         //[Nazwa];;Procek;;RAM / DYSK / KAM;;SIZE (GRADE);;[GPU] ;;[BATERIA];;[GRADE 2];;[OPIS] ;;[UKLAD];;[PODS]
-        var qrInfo = `${nazwa};;${procesor};;${rdk};;${martyca} (${cur_frm.doc.grade_matrycy});;${gpu} ;;${bat1} ${bat2};;${cur_frm.doc.grade_obudowy};;${opis} ;;${cur_frm.doc.uklad_klawiatury=="PL"?"1":"0"};;${cur_frm.doc.podswietlana_klawiatura}`;
+        var qrInfo = `${nazwa};;${procesor};;${rdk};;${martyca} (${frm.doc.grade_matrycy});;${gpu} ;;${bat1} ${bat2};;${frm.doc.grade_obudowy};;${opis} ;;${frm.doc.uklad_klawiatury=="PL"?"1":"0"};;${frm.doc.podswietlana_klawiatura}`;
         qrInfo = qrInfo.replaceAll(/\r?\n/g, ', ').replaceAll(/ą/g, "a").replaceAll(/ę/g, "e").replaceAll(/ć/g, "c").replaceAll(/ł/g, "l").replaceAll(/ń/g, "n").replaceAll(/ż/g, "z").replaceAll(/ź/g, "z").replaceAll(/ś/g, "s").replaceAll(/ó/g, "o").replaceAll(/Ą/g, "A").replaceAll(/Ę/g, "E").replaceAll(/Ć/g, "C").replaceAll(/Ł/g, "L").replaceAll(/Ń/g, "N").replaceAll(/Ż/g, "Z").replaceAll(/Ź/g, "Z").replaceAll(/Ś/g, "S").replaceAll(/Ó/g, "O");
         qrInfo = qrInfo.replaceAll(/%/g, "%25");
         //console.log(qrInfo);
@@ -387,16 +394,16 @@ function PrintElem()
         mywindow.document.write('<div id="printText">');
         mywindow.document.write('<p>'+nazwa+'</p>');
         mywindow.document.write('<p>'+procesor+'</p><p>'+rdk+'</p>');
-        mywindow.document.write('<p>'+martyca+' ('+cur_frm.doc.grade_matrycy+')</p><p>.'+gpu+'</p>');
-        mywindow.document.write('<p>'+bat1+' '+bat2+' Grade '+cur_frm.doc.grade_obudowy+'</p></div>');
+        mywindow.document.write('<p>'+martyca+' ('+frm.doc.grade_matrycy+')</p><p>.'+gpu+'</p>');
+        mywindow.document.write('<p>'+bat1+' '+bat2+' Grade '+frm.doc.grade_obudowy+'</p></div>');
         
-        mywindow.document.write('<div id="floatText"><p>.'+cur_frm.doc.uklad_klawiatury+'</p><p>'+podswietlanie+'</p><p>'+trackpoint+'</p></div>');
+        mywindow.document.write('<div id="floatText"><p>.'+frm.doc.uklad_klawiatury+'</p><p>'+podswietlanie+'</p><p>'+trackpoint+'</p></div>');
         
         mywindow.document.write('<div id="printId"><div id="printSerial">');
-        mywindow.document.write('<img id="barcode" src="https://barcode.tec-it.com/barcode.ashx?data='+(cur_frm.doc.nr_seryjny ? cur_frm.doc.nr_seryjny : 'DOL000000')+'&amp;code=DataMatrix&amp;translate-esc=on&amp;dpi=200&amp;eclevel=L&amp;dmsize=Default"></div>');
-        mywindow.document.write('<div id="serialtext" style="font-size: 10px;">'+(cur_frm.doc.nr_seryjny ? cur_frm.doc.nr_seryjny : 'DOL000000')+'</div>');
+        mywindow.document.write('<img id="barcode" src="https://barcode.tec-it.com/barcode.ashx?data='+(frm.doc.nr_seryjny ? frm.doc.nr_seryjny : 'DOL000000')+'&amp;code=DataMatrix&amp;translate-esc=on&amp;dpi=200&amp;eclevel=L&amp;dmsize=Default"></div>');
+        mywindow.document.write('<div id="serialtext" style="font-size: 10px;">'+(frm.doc.nr_seryjny ? frm.doc.nr_seryjny : 'DOL000000')+'</div>');
 
-        mywindow.document.write('<div id="printAuthor"> '+autor+'| '+currentDate+' | </div></div></div>');
+        mywindow.document.write('<div id="printAuthor"> '+frm.doc.username+'| '+currentDate+' | </div></div></div>');
         mywindow.document.write('<div id="printText2" style="font-size: 9px;">'+opis+'</div>');
         mywindow.document.write('</div></div>');
         mywindow.document.write('</body></html>');
@@ -409,4 +416,11 @@ function PrintElem()
         mywindow.print();
         mywindow.close();
     }, 1000);
+}
+
+function load_username(frm){
+    frappe.db.get_value('User', cur_frm.doc.modified_by, 'username').then(r => {
+        frm.doc.username = r.message.username;
+        frm.refresh_field('username');
+    });
 }

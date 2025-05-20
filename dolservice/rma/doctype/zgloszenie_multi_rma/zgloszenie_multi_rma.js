@@ -99,7 +99,7 @@ function indicator_status(frm){
       var rows = document.querySelector('[data-fieldname="serwisowane_urządzenia"]').querySelector('.grid-body').querySelectorAll('.data-row');
          var j = 0;
          rows.forEach(row =>{
-            row.querySelector('[data-fieldname="child_rma"]').querySelector('a').setAttribute('title', frm.doc.serwisowane_urządzenia[j].status);
+            row.querySelector('[data-fieldname="child_rma"]').querySelector('a')?.setAttribute('title', frm.doc.serwisowane_urządzenia[j].status);
             j++;
          });
    }

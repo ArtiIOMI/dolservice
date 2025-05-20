@@ -17,11 +17,11 @@ class LaptopInfo {
 
 frappe.ui.form.on("Opis Asortymentu", {
     onload: function(frm){
-        load_username(frm);
     },
 
     refresh: function(frm)
     {
+        load_username(frm);
         add_3_row(frm);
 
         //Dodawanie przycisku do tabeli
@@ -419,7 +419,7 @@ function PrintElem(frm)
 }
 
 function load_username(frm){
-    frappe.db.get_value('User', cur_frm.doc.modified_by, 'username').then(r => {
+    frappe.db.get_value('User', frm.doc.modified_by, 'username').then(r => {
         frm.doc.username = r.message.username;
         frm.refresh_field('username');
     });

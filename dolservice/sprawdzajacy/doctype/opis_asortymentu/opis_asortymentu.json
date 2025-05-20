@@ -12,6 +12,7 @@
   "nr_seryjny",
   "column_break_flgh",
   "item_name",
+  "full_name_model",
   "dostawa",
   "section_break_ntii",
   "uszkodzenia",
@@ -28,7 +29,8 @@
   "trackpoint",
   "kamera",
   "section_break_ccpz",
-  "konfiguracja"
+  "konfiguracja",
+  "username"
  ],
  "fields": [
   {
@@ -155,11 +157,24 @@
   {
    "fieldname": "glowa",
    "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "item_name.item_name",
+   "fieldname": "full_name_model",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Pe\u0142na Nazwa Modelu"
+  },
+  {
+   "fieldname": "username",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "username"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-09 20:33:24.959998",
+ "modified": "2025-05-19 19:52:03.103799",
  "modified_by": "Administrator",
  "module": "Sprawdzajacy",
  "name": "Opis Asortymentu",
@@ -180,6 +195,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

@@ -27,6 +27,9 @@ frappe.ui.form.on("Zgloszenie Multi-RMA", {
 
 //W zależności czy Zbiorcze RMA posiada już pojedyńcze RMA pojawie się odpowiedni Przycisk
 function czy_posiada_RMA(frm){
+   if(!frappe.model.can_create("Zgloszenie RMA")){
+      return;
+   }
    frappe.db.get_list('Zgloszenie RMA', {fields: ['name'], filters: { 'name': ["like", "%"+cur_frm.doc.name+"%"]}})
       .then(res => {         
          if(cur_frm.doc.serwisowane_urządzenia.length != res.length) //cur_frm.doc.serwisowane_urządzenia.length == res.length

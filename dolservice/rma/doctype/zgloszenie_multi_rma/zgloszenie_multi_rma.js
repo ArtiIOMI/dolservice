@@ -33,11 +33,12 @@ function czy_posiada_RMA(frm){
    frappe.db.get_list('Zgloszenie RMA', {fields: ['name'], filters: { 'name': ["like", "%"+cur_frm.doc.name+"%"]}})
       .then(res => {
          frm.add_custom_button(__("Lista RMA"), () => {frappe.set_route('List', 'Zgloszenie RMA', {parent_rma: frm.docname})}, __("RMA"));
-         frm.add_custom_button(__("Udostępnij"), () => share_RMA(frm), __("RMA"));
-
-         if(cur_frm.doc.serwisowane_urządzenia.length != res.length){
-            frm.add_custom_button(__("Podziel RMA"), () => split_RMA(frm), __("RMA"));
-            frm.add_custom_button(__("Podziel RMA i Udostępnij"), () => {}, __("RMA"));
+         
+         if(hasAnyChildRMA(frm)){
+            frm.add_custom_button(__("Udostępnij"), () => frappe.confirm("Czy chciałbyś komuś udostępnić podzielone RMA?",() => {share_RMA(frm)}), __("RMA"));
+         }else{   
+            frm.add_custom_button(__("Podziel RMA"), () => frappe.confirm("Czy chciałbyś podzielić RMA?",() => {split_RMA(frm)}), __("RMA"));
+            frm.add_custom_button(__("Podziel RMA i Udostępnij"), () => frappe.confirm("Czy chciałbyś podzielić RMA i komuś je udostępnić?",() => {split_share_RMA(frm)}), __("RMA"));
             
          } //cur_frm.doc.serwisowane_urządzenia.length == res.length
       });
@@ -49,46 +50,68 @@ function send_to_RMAs(){
 }
 
 //Dzieli Jedno zbiorcze RMA na Klilka miejszych, ilość zależna od wierszy w tabeli
-function split_RMA(frm){
-   frappe.show_progress('Wpisywanie pojedyńczych RMA...', 0, frm.doc.serwisowane_urządzenia.length, 'Please wait');
-   for(var i=0; i<frm.doc.serwisowane_urządzenia.length; i++){
-      if(!empty_or_null(frm.doc.serwisowane_urządzenia[i].child_rma))
-         continue;
-      frappe.db.insert({
-         doctype: 'Zgloszenie RMA',
-         temp_number: i+1,
-         podmiot: frm.doc.podmiot,
-         nazwa_podmiotu: frm.doc.nazwa_podmiotu,
-         email: frm.doc.email,
-         telefon_kontaktowy: frm.doc.telefon_kontaktowy,
-         adres: frm.doc.adres,
-         paid: frm.doc.serwisowane_urządzenia[i].paid,
-         item_name: frm.doc.serwisowane_urządzenia[i].marka_model,
-         serial_no: frm.doc.serwisowane_urządzenia[i].nr_seryjny,
-         sale_invoice:  frm.doc.serwisowane_urządzenia[i].nr_fakturyparagonu,
-         sale_date: frm.doc.serwisowane_urządzenia[i].data_zakupu,
-         description: frm.doc.serwisowane_urządzenia[i].opis_usterki,
-         parent_rma: frm.doc.name
-      })
-      .then(function(doc) {
-         frm.doc.serwisowane_urządzenia[doc.temp_number-1].child_rma = doc.name;
-      });
-      frappe.show_progress('Wpisywanie pojedyńczych RMA...', i, frm.doc.serwisowane_urządzenia.length, 'Proszę Czekać');
+async function split_RMA(frm) {
+   const devices = frm.doc.serwisowane_urządzenia || [];
+   const total = devices.length;
+   let current = 0;
+
+   if (!total) {
+       frappe.msgprint("Brak urządzeń do podziału.");
+       return;
    }
 
-   setTimeout(()=>{
-      frappe.show_progress('Wpisywanie pojedyńczych RMA...', frm.doc.serwisowane_urządzenia.length, frm.doc.serwisowane_urządzenia.length, 'Ukończono', true);
-      
-      frm.dirty(); 
-      frm.save();
-      frm.reload_doc();
+   frappe.show_progress("Wpisywanie pojedynczych RMA...", current, total, "Proszę czekać");
 
-      frappe.show_alert({message:__('RMA Poprawnie Podzielone!'),
-         indicator:'green'
-      }, 5);
-   }, 1000);
-} 
+   for (let i = 0; i < total; i++) {
+       const device = devices[i];
 
+       if (device.child_rma) {
+           current++;
+           frappe.show_progress("Wpisywanie pojedynczych RMA...", current, total, "Pomiń istniejące");
+           continue;
+       }
+
+       try {
+           const doc = await frappe.db.insert({
+               doctype: "Zgloszenie RMA",
+               temp_number: i + 1,
+               podmiot: frm.doc.podmiot,
+               nazwa_podmiotu: frm.doc.nazwa_podmiotu,
+               email: frm.doc.email,
+               telefon_kontaktowy: frm.doc.telefon_kontaktowy,
+               adres: frm.doc.adres,
+               paid: device.paid,
+               item_name: device.marka_model,
+               serial_no: device.nr_seryjny,
+               sale_invoice: device.nr_fakturyparagonu,
+               sale_date: device.data_zakupu,
+               description: device.opis_usterki,
+               parent_rma: frm.doc.name
+           });
+
+           // Zaktualizuj child_rma
+           frappe.model.set_value(device.doctype, device.name, "child_rma", doc.name);
+
+       } catch (err) {
+           console.error("Błąd przy tworzeniu RMA:", err);
+           frappe.msgprint(`Błąd przy pozycji ${i + 1}: ${err.message}`);
+       }
+
+       current++;
+       frappe.show_progress("Wpisywanie pojedynczych RMA...", current, total);
+   }
+
+   frappe.show_progress("Wpisywanie pojedynczych RMA...", total, total, "Zakończono", true);
+
+   // Odśwież dokument po zakończeniu
+   await frm.save();
+   await frm.reload_doc();
+
+   frappe.show_alert({
+       message: __("RMA poprawnie podzielone!"),
+       indicator: "green"
+   }, 5);
+}
 
 function indicator_status(frm){
    var rows = frm.fields_dict['serwisowane_urządzenia'].get_value();
@@ -128,34 +151,29 @@ function empty_or_null(f){
    return false;
 }
 
-function share_RMA(frm){
-   frappe.confirm(
-      "Czy chciałbyś komuś udostępnić podzielone RMA?",
-      () => {
-         // Użytkownik potwierdził — pokaż okno dialogowe
-         const d = new frappe.ui.Dialog({
-            title: "Wybierz użytkownika do udostępnienia",
-            fields: [
-                  {
-                     label: "Użytkownik",
-                     fieldname: "user",
-                     fieldtype: "Link",
-                     options: "User",
-                     reqd: 1
-                  }
-            ],
-            primary_action_label: "Udostępnij",
-            primary_action(values) {
-               frm.doc.serwisowane_urządzenia.forEach(row => {
-                  call_share_RMA(row.child_rma, values.user);
-              })
-               
-               d.hide();
+async function share_RMA(frm){
+   // Użytkownik potwierdził — pokaż okno dialogowe
+   const d = new frappe.ui.Dialog({
+      title: "Wybierz użytkownika do udostępnienia",
+      fields: [
+            {
+               label: "Użytkownik",
+               fieldname: "user",
+               fieldtype: "Link",
+               options: "User",
+               reqd: 1
             }
-         });
-         d.show();
+      ],
+      primary_action_label: "Udostępnij",
+      primary_action(values) {
+         frm.doc.serwisowane_urządzenia.forEach(row => {
+            call_share_RMA(row.child_rma, values.user);
+         })
+         
+         d.hide();
       }
-   );
+   });
+   d.show();
 }
 
 function call_share_RMA(name, user){
@@ -169,4 +187,13 @@ function call_share_RMA(name, user){
           frappe.msgprint(r.message);
       }
   });
+}
+
+async function split_share_RMA(frm){
+   await split_RMA(frm);
+   await share_RMA(frm);
+}
+
+function hasAnyChildRMA(frm) {
+   return (frm.doc.serwisowane_urządzenia || []).some(row => !!row.child_rma);
 }

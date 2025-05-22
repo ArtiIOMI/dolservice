@@ -16,7 +16,7 @@ def udostepnij_dokument(docname, user):
     )
 
     if already_shared:
-        return _("Dokument {0} jest już udostępniony użytkownikowi {1}.").format(docname, user)
+        return _("<color=red>Dokument {0} jest już udostępniony użytkownikowi {1}.</color>").format(docname, user)
 
     frappe.share.add("Zgloszenie RMA", docname, user, read=1)
-    return _("Dokument udostępniony użytkownikowi {0}").format(user)
+    return _("Dokument {0} udostępniony użytkownikowi {1}").format(docname, user)
